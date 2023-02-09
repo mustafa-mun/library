@@ -1,0 +1,49 @@
+$background: radial-gradient( circle farthest-corner at 10% 20%,  rgba(97,186,255,1) 0%, rgba(166,239,253,1) 90.1% );
+:root {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  left: 0;
+  right: 0;
+  height: 11vh;
+  top: 0;
+  background-image: $background;
+  figure {
+    display: flex;
+    align-items: center;
+    min-width: 100px;
+
+    img {
+      width: max(8%, 30px);
+      margin-right: 3%;
+    }
+
+    figcaption {
+      font-size: max(1.8vw, 15px);
+    }
+  }
+}
+
+#add-book-modal{
+
+}
+
+#add-book-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: max(4vw, 50px);
+  height: max(4vw, 50px);
+  font-size: 25px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: none;
+  background-image: $background;
+}
