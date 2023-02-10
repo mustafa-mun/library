@@ -7,8 +7,6 @@ const addBookMenuBtn = document.getElementById("add-book-menu-btn");
 const modal = document.getElementById("add-book-modal");
 const booksSection = document.getElementById("books-section");
 
-// Change books read status in respect to local storage items read status
-
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -110,6 +108,7 @@ function createElements(array) {
     });
   });
 }
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   addBooksToLibrary();

@@ -21,11 +21,11 @@ header figure {
   min-width: 100px;
 }
 header figure img {
-  width: max(8%, 30px);
+  width: max(3vw, 30px);
   margin-right: 3%;
 }
 header figure figcaption {
-  font-size: max(1.8vw, 15px);
+  font-size: max(3vw, 15px);
 }
 
 .add-book-modal {

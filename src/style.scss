@@ -23,14 +23,14 @@ header {
     display: flex;
     align-items: center;
     min-width: 100px;
-
+  
     img {
-      width: max(8%, 30px);
+      width: max(3vw, 30px);
       margin-right: 3%;
     }
 
     figcaption {
-      font-size: max(1.8vw, 15px);
+      font-size: max(3vw, 15px);
     }
   }
 }
