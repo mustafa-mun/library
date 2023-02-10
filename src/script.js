@@ -29,7 +29,6 @@ function toggleModal() {
   modal.classList.toggle("visible");
 }
 
-
 function addBooksToLibrary() {
   const title = bookTitleInput.value;
   const author = bookAuthorInput.value;
@@ -43,7 +42,6 @@ function addBooksToLibrary() {
     localStorage.setItem("book", JSON.stringify(newArr));
   }
 }
-
 
 function createElements(array) {
   // Create book card
@@ -103,14 +101,14 @@ function createElements(array) {
   bookInfo.appendChild(bookAuthor);
   bookInfo.appendChild(bookPages);
   div.appendChild(statusBtn);
-  array.forEach(item => {
+  array.forEach((item) => {
     closeIcon.addEventListener("click", () => {
-      const index = array.indexOf(item)
-      newArr.splice(index,1)
-      localStorage.setItem("book", JSON.stringify(newArr))
+      const index = array.indexOf(item);
+      newArr.splice(index, 1);
+      localStorage.setItem("book", JSON.stringify(newArr));
       booksSection.removeChild(div);
     });
-  })
+  });
 }
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -142,13 +140,16 @@ function createStorageElements(array) {
     bookAuthor.textContent = `AUTHOR: ${item.author}`;
     bookPages.textContent = `${item.pages} pages`;
     statusBtn.className = "read-unread-btn";
-
+    // let {read: readed} = item
     statusBtn.addEventListener("click", () => {
       if (!item.read) {
         item.read = true;
+        localStorage.setItem("book", JSON.stringify(array));
       } else {
         item.read = false;
+        localStorage.setItem("book", JSON.stringify(array));
       }
+
       if (item.read) {
         statusBtn.style.backgroundColor = "green";
         statusBtn.textContent = "READ";
@@ -177,9 +178,9 @@ function createStorageElements(array) {
     div.appendChild(statusBtn);
 
     closeIcon.addEventListener("click", () => {
-      const index = array.indexOf(item)
-      newArr.splice(index,1)
-      localStorage.setItem("book", JSON.stringify(newArr))
+      const index = array.indexOf(item);
+      newArr.splice(index, 1);
+      localStorage.setItem("book", JSON.stringify(array));
       booksSection.removeChild(div);
     });
   });
