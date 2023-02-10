@@ -20,15 +20,15 @@
       <form action="#" method="get">
         <div>
           <label for="book-title">Title</label>
-          <input type="text" id="book-title">
+          <input type="text" id="book-title" required>
         </div>
         <div>
           <label for="book-author">Author</label>
-          <input type="text" id="book-author">
+          <input type="text" id="book-author" required>
         </div>
         <div>
           <label for="page-number">Number of Pages</label>
-          <input type="number" id="page-number">
+          <input type="number" id="page-number" required>
         </div>
         <div style="flex-direction: row; align-self: start; width: 100%; justify-content: space-between;">
           <label for="read-status">Have you read</label>
@@ -40,12 +40,19 @@
 
     <section id="books-section">
       <!-- Books -->
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <!--  <div>
+        <div class="close-i-container">
+          <img id="i-icon" src="assets/letter-i.png" alt="information-icon">
+          <img id="close-icon" src="assets/close.png" alt="close-icon">
+        </div>
+        <div class="book-information">
+          <p>TITLE: Game of Thrones</p>
+          <p>AUTHOR: George RR Martin</p>
+          <p>600 Pages</p>
+        </div>
+        <button class="read-unread-btn">UNREAD</button>
+      </div> -->
+     
     </section>
 
     <button id="add-book-menu-btn">+</button>
