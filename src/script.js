@@ -1,4 +1,27 @@
-const header = document.querySelector("header");
+const form = document.querySelector("form");
+const bookTitleInput = document.getElementById("book-title");
+const bookAuthorInput = document.getElementById("book-author");
+const bookPagesInput = document.getElementById("page-number");
+const readStatusInput = document.getElementById("read-status");
+const addBookMenuBtn = document.getElementById("add-book-menu-btn");
+const addBookBtn = document.getElementById("add-book-btn");
+const modal = document.getElementById("add-book-modal");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const title = bookTitleInput.value;
+  const author = bookAuthorInput.value;
+  const pages = bookPagesInput.value;
+  const readStatusCheck = readStatusInput.checked;
+  console.log(readStatusCheck);
+});
+
+addBookMenuBtn.addEventListener("click", () => {
+  // Toggle book add menu
+  modal.classList.toggle("visible");
+});
+
+// function toggleModal() {}
 
 // Try to make a modal book information menu with this api
 

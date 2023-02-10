@@ -16,13 +16,39 @@
       </figure>
     </header>
 
-    <div id="add-book-modal">
+    <div class="add-book-modal" id="add-book-modal">
       <form action="#" method="get">
-        
+        <div>
+          <label for="book-title">Title</label>
+          <input type="text" id="book-title">
+        </div>
+        <div>
+          <label for="book-author">Author</label>
+          <input type="text" id="book-author">
+        </div>
+        <div>
+          <label for="page-number">Number of Pages</label>
+          <input type="number" id="page-number">
+        </div>
+        <div style="flex-direction: row; align-self: start; width: 100%; justify-content: space-between;">
+          <label for="read-status">Have you read</label>
+          <input type="checkbox" name="read-status" id="read-status" style="width: 30px;">
+        </div>
+        <button id="add-book-btn" type="submit">ADD</button>
       </form>
     </div>
 
-    <button id="add-book-btn">+</button>
+    <section id="books-section">
+      <!-- Books -->
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+
+    <button id="add-book-menu-btn">+</button>
     <script src="script.js"></script>
   </body>
 </html>

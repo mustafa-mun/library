@@ -28,7 +28,43 @@ header figure figcaption {
   font-size: max(1.8vw, 15px);
 }
 
-#add-book-btn {
+.add-book-modal {
+  display: flex;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.add-book-modal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+}
+.add-book-modal form div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.add-book-modal form #add-book-btn {
+  border: none;
+  background-image: radial-gradient(circle farthest-corner at 10% 20%, rgb(97, 186, 255) 0%, rgb(166, 239, 253) 90.1%);
+  border-radius: 8px;
+  width: 125px;
+  height: 40px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#add-book-menu-btn {
   position: fixed;
   bottom: 40px;
   right: 40px;
@@ -39,4 +75,22 @@ header figure figcaption {
   cursor: pointer;
   border: none;
   background-image: radial-gradient(circle farthest-corner at 10% 20%, rgb(97, 186, 255) 0%, rgb(166, 239, 253) 90.1%);
+}
+
+.visible {
+  visibility: visible;
+}
+
+#books-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 50px;
+  margin-top: 200px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+#books-section div {
+  border: solid red 1px;
+  border-radius: 10px;
+  height: 250px;
 }/*# sourceMappingURL=style.css.map */
