@@ -133,4 +133,29 @@ header figure figcaption {
   justify-content: flex-start;
   box-shadow: none;
   margin: 25px;
+}
+
+#info-modal {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+#info-modal #info-card {
+  display: flex;
+  width: 60vh;
+  height: 40vh;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.not-hidden {
+  visibility: visible;
 }/*# sourceMappingURL=style.css.map */

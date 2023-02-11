@@ -6,6 +6,7 @@ const readStatusInput = document.getElementById("read-status");
 const addBookMenuBtn = document.getElementById("add-book-menu-btn");
 const modal = document.getElementById("add-book-modal");
 const booksSection = document.getElementById("books-section");
+const infoModal = document.getElementById("info-modal");
 
 class Book {
   constructor(title, author, pages, read) {
@@ -17,106 +18,10 @@ class Book {
 }
 
 const myLibrary = [];
-const newArr = JSON.parse(localStorage.getItem("book"));
+const storageArr = JSON.parse(localStorage.getItem("book"));
 
-if (newArr) {
-  createStorageElements(newArr);
-}
-
-function toggleModal() {
-  modal.classList.toggle("visible");
-}
-
-function addBooksToLibrary() {
-  const title = bookTitleInput.value;
-  const author = bookAuthorInput.value;
-  const pages = bookPagesInput.value;
-  const readStatusCheck = readStatusInput.checked;
-  const book = new Book(title, author, pages, readStatusCheck);
-  myLibrary.push(book);
-  localStorage.setItem("book", JSON.stringify(myLibrary));
-  if (newArr) {
-    newArr.push(book);
-    localStorage.setItem("book", JSON.stringify(newArr));
-  }
-}
-
-function createElements(array) {
-  // Create book card
-
-  const div = document.createElement("div");
-  const iconsContainer = document.createElement("div");
-  const infoIcon = document.createElement("img");
-  const closeIcon = document.createElement("img");
-  const bookInfo = document.createElement("div");
-  const bookTitle = document.createElement("p");
-  const bookAuthor = document.createElement("p");
-  const bookPages = document.createElement("p");
-  const statusBtn = document.createElement("button");
-  array.forEach((item) => {
-    iconsContainer.className = "close-i-container";
-    infoIcon.setAttribute("src", "assets/letter-i.png");
-    infoIcon.setAttribute("name", "info-icon");
-    closeIcon.setAttribute("src", "assets/close.png");
-    closeIcon.setAttribute("name", "close-icon");
-    infoIcon.id = "i-icon";
-    closeIcon.id = "close-icon";
-    bookInfo.className = "book-information";
-    bookTitle.textContent = `TITLE:  ${item.title}`;
-    bookAuthor.textContent = `AUTHOR: ${item.author}`;
-    bookPages.textContent = `${item.pages} pages`;
-    statusBtn.className = "read-unread-btn";
-
-    if (!item.read) {
-      statusBtn.style.backgroundColor = "red";
-      statusBtn.textContent = "UNREAD";
-    } else {
-      statusBtn.style.backgroundColor = "green";
-      statusBtn.textContent = "READ";
-    }
-
-    statusBtn.addEventListener("click", () => {
-      if (item.read) {
-        item.read = false;
-      } else {
-        item.read = true;
-      }
-      if (!item.read) {
-        statusBtn.style.backgroundColor = "green";
-        statusBtn.textContent = "READ";
-      } else {
-        statusBtn.style.backgroundColor = "red";
-        statusBtn.textContent = "UNREAD";
-      }
-    });
-  });
-  booksSection.appendChild(div);
-  div.appendChild(iconsContainer);
-  iconsContainer.appendChild(infoIcon);
-  iconsContainer.appendChild(closeIcon);
-  div.appendChild(bookInfo);
-  bookInfo.appendChild(bookTitle);
-  bookInfo.appendChild(bookAuthor);
-  bookInfo.appendChild(bookPages);
-  div.appendChild(statusBtn);
-  array.forEach((item) => {
-    closeIcon.addEventListener("click", () => {
-      const index = array.indexOf(item);
-      newArr.splice(index, 1);
-      localStorage.setItem("book", JSON.stringify(newArr));
-      booksSection.removeChild(div);
-    });
-  });
-}
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  addBooksToLibrary();
-  createElements(myLibrary);
-  toggleModal();
-});
-
-function createStorageElements(array) {
+function createStorageBookCards(array) {
+  // Same with createBookCards function but everything is happening in array.forEach method
   array.forEach((item) => {
     const div = document.createElement("div");
     const iconsContainer = document.createElement("div");
@@ -143,12 +48,91 @@ function createStorageElements(array) {
     statusBtn.addEventListener("click", () => {
       if (!item.read) {
         item.read = true;
-        localStorage.setItem("book", JSON.stringify(array));
       } else {
         item.read = false;
-        localStorage.setItem("book", JSON.stringify(array));
       }
 
+      if (item.read) {
+        statusBtn.style.backgroundColor = "green";
+        statusBtn.textContent = "READ";
+      } else {
+        statusBtn.style.backgroundColor = "red";
+        statusBtn.textContent = "UNREAD";
+      }
+      localStorage.setItem("book", JSON.stringify(array)); // Update the read status on local storage
+    });
+
+    if (!item.read) {
+      statusBtn.style.backgroundColor = "red";
+      statusBtn.textContent = "UNREAD";
+    } else {
+      statusBtn.style.backgroundColor = "green";
+      statusBtn.textContent = "READ";
+    }
+
+    booksSection.appendChild(div);
+    div.appendChild(iconsContainer);
+    iconsContainer.appendChild(infoIcon);
+    iconsContainer.appendChild(closeIcon);
+    div.appendChild(bookInfo);
+    bookInfo.appendChild(bookTitle);
+    bookInfo.appendChild(bookAuthor);
+    bookInfo.appendChild(bookPages);
+    div.appendChild(statusBtn);
+
+    closeIcon.addEventListener("click", () => {
+      const index = array.indexOf(item);
+      storageArr.splice(index, 1);
+      localStorage.setItem("book", JSON.stringify(array));
+      booksSection.removeChild(div);
+    });
+  });
+}
+
+if (storageArr) {
+  // If local storage is not empty display the book cards
+  createStorageBookCards(storageArr);
+}
+
+function toggleModal() {
+  // Toggle the add book form menu
+  modal.classList.toggle("visible");
+}
+
+function createBookCards(array) {
+  // Create book card
+
+  const div = document.createElement("div");
+  const iconsContainer = document.createElement("div");
+  const infoIcon = document.createElement("img");
+  const closeIcon = document.createElement("img");
+  const bookInfo = document.createElement("div");
+  const bookTitle = document.createElement("p");
+  const bookAuthor = document.createElement("p");
+  const bookPages = document.createElement("p");
+  const statusBtn = document.createElement("button");
+
+  array.forEach((item) => {
+    iconsContainer.className = "close-i-container";
+    infoIcon.setAttribute("src", "assets/letter-i.png");
+    infoIcon.setAttribute("name", "info-icon");
+    closeIcon.setAttribute("src", "assets/close.png");
+    closeIcon.setAttribute("name", "close-icon");
+    infoIcon.id = "i-icon";
+    closeIcon.id = "close-icon";
+    bookInfo.className = "book-information";
+    bookTitle.textContent = `TITLE:  ${item.title}`;
+    bookAuthor.textContent = `AUTHOR: ${item.author}`;
+    bookPages.textContent = `${item.pages} pages`;
+    statusBtn.className = "read-unread-btn";
+
+    // THERE IS A BUG !!! FIRST REFRESH ON READ STATUS UPDATE IS NOT WORKING
+    statusBtn.addEventListener("click", () => {
+      if (!item.read) {
+        item.read = true;
+      } else {
+        item.read = false;
+      }
       if (item.read) {
         statusBtn.style.backgroundColor = "green";
         statusBtn.textContent = "READ";
@@ -175,15 +159,40 @@ function createStorageElements(array) {
     bookInfo.appendChild(bookAuthor);
     bookInfo.appendChild(bookPages);
     div.appendChild(statusBtn);
-
     closeIcon.addEventListener("click", () => {
-      const index = array.indexOf(item);
-      newArr.splice(index, 1);
-      localStorage.setItem("book", JSON.stringify(array));
-      booksSection.removeChild(div);
+      // Delete the book from library array and update the local storage
+      const index = storageArr.indexOf(item);
+      console.log(index);
+      storageArr.splice(index, 1);
+      localStorage.setItem("book", JSON.stringify(storageArr));
     });
   });
+  closeIcon.addEventListener("click", () => {
+    booksSection.removeChild(div);
+  });
 }
+
+function addBooksToLibrary() {
+  const title = bookTitleInput.value;
+  const author = bookAuthorInput.value;
+  const pages = bookPagesInput.value;
+  const readStatusCheck = readStatusInput.checked;
+  const book = new Book(title, author, pages, readStatusCheck);
+  myLibrary.push(book);
+  localStorage.setItem("book", JSON.stringify(myLibrary));
+  if (storageArr) {
+    storageArr.push(book);
+    localStorage.setItem("book", JSON.stringify(storageArr));
+  }
+}
+
+form.addEventListener("submit", (event) => {
+  // Display book with form data
+  event.preventDefault();
+  addBooksToLibrary();
+  createBookCards(myLibrary);
+  toggleModal();
+});
 
 addBookMenuBtn.addEventListener("click", () => {
   // Toggle book add menu
