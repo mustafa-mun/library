@@ -19,8 +19,7 @@ class Book {
 
 const myLibrary = [];
 const storageArr = JSON.parse(localStorage.getItem("book"));
-const divsArr = [];
-const closeIconArr = [];
+
 
 function createStorageBookCards(array) {
   // Same with createBookCards function but everything is happening in array.forEach method
@@ -107,78 +106,6 @@ function createBookCards() {
     booksSection.removeChild(booksSection.firstChild);
   }
   createStorageBookCards(storageArr);
-
-  // array.forEach(item => {
-  // const div = document.createElement("div");
-  // divsArr.push(div);
-  // const iconsContainer = document.createElement("div");
-  // const infoIcon = document.createElement("img");
-  // const closeIcon = document.createElement("img");
-  // const bookInfo = document.createElement("div");
-  // const bookTitle = document.createElement("p");
-  // const bookAuthor = document.createElement("p");
-  // const bookPages = document.createElement("p");
-  // const statusBtn = document.createElement("button");
-  // closeIconArr.push(closeIcon);
-  // iconsContainer.className = "close-i-container";
-  // infoIcon.setAttribute("src", "assets/letter-i.png");
-  // infoIcon.setAttribute("name", "info-icon");
-  // closeIcon.setAttribute("src", "assets/close.png");
-  // closeIcon.setAttribute("name", "close-icon");
-  // infoIcon.id = "i-icon";
-  // closeIcon.id = "close-icon";
-  // bookInfo.className = "book-information";
-  // bookTitle.textContent = `TITLE:  ${item.title}`;
-  // bookAuthor.textContent = `AUTHOR: ${item.author}`;
-  // bookPages.textContent = `${item.pages} pages`;
-  // statusBtn.className = "read-unread-btn";
-  // // THERE IS A BUG !!! FIRST REFRESH ON READ STATUS UPDATE IS NOT WORKING
-  // statusBtn.addEventListener("click", () => {
-  //   if (!item.read) {
-  //     item.read = true;
-  //   } else {
-  //     item.read = false;
-  //   }
-  //   if (item.read) {
-  //     statusBtn.style.backgroundColor = "green";
-  //     statusBtn.textContent = "READ";
-  //   } else {
-  //     statusBtn.style.backgroundColor = "red";
-  //     statusBtn.textContent = "UNREAD";
-  //   }
-  // });
-
-  // if (!item.read) {
-  //   statusBtn.style.backgroundColor = "red";
-  //   statusBtn.textContent = "UNREAD";
-  // } else {
-  //   statusBtn.style.backgroundColor = "green";
-  //   statusBtn.textContent = "READ";
-  // }
-
-  // booksSection.appendChild(div);
-  // div.appendChild(iconsContainer);
-  // iconsContainer.appendChild(infoIcon);
-  // iconsContainer.appendChild(closeIcon);
-  // div.appendChild(bookInfo);
-  // bookInfo.appendChild(bookTitle);
-  // bookInfo.appendChild(bookAuthor);
-  // bookInfo.appendChild(bookPages);
-  // div.appendChild(statusBtn);
-
-  // closeIconArr.forEach((item) => {
-  //   item.addEventListener("click", () => {
-  //     const iconIndex = closeIconArr.indexOf(item);
-  //     if (booksSection.contains(divsArr[iconIndex])) {
-  //       booksSection.removeChild(divsArr[iconIndex]);
-  //     }
-  //   });
-  // });
-  // })
-
-  // storageArr.forEach(item => {
-  //   if(item.title)
-  // })
 }
 
 function addBooksToLibrary() {
@@ -203,7 +130,6 @@ form.addEventListener("submit", (event) => {
   toggleModal();
   console.log(myLibrary, "my library array");
   console.log(storageArr, "storage array");
-  console.log(divsArr, "divs array");
 });
 
 addBookMenuBtn.addEventListener("click", () => {
