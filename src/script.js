@@ -7,6 +7,7 @@ const addBookMenuBtn = document.getElementById("add-book-menu-btn");
 const modal = document.getElementById("add-book-modal");
 const booksSection = document.getElementById("books-section");
 const infoModal = document.getElementById("info-modal");
+const infoCloseBtn = document.getElementById("info-close-btn");
 
 class Book {
   constructor(title, author, pages, read) {
@@ -20,9 +21,7 @@ class Book {
 const myLibrary = [];
 const storageArr = JSON.parse(localStorage.getItem("book"));
 
-
 function createStorageBookCards(array) {
-  // Same with createBookCards function but everything is happening in array.forEach method
   array.forEach((item) => {
     const div = document.createElement("div");
     const iconsContainer = document.createElement("div");
@@ -81,6 +80,10 @@ function createStorageBookCards(array) {
     bookInfo.appendChild(bookPages);
     div.appendChild(statusBtn);
 
+    infoIcon.addEventListener("click", () => {
+      infoModal.classList.toggle("not-hidden");
+    });
+
     closeIcon.addEventListener("click", () => {
       const index = array.indexOf(item);
       storageArr.splice(index, 1);
@@ -100,11 +103,24 @@ function toggleModal() {
   modal.classList.toggle("visible");
 }
 
-function createBookCards() {
-  // Create book card
+function toggleInfo() {
+  infoModal.classList.toggle("not-hidden");
+}
+
+function refresh() {
   while (booksSection.firstChild) {
     booksSection.removeChild(booksSection.firstChild);
   }
+}
+
+infoCloseBtn.addEventListener("click", () => {
+
+  toggleInfo()
+})
+
+function createBookCards() {
+  // Create book card
+  refresh();
   createStorageBookCards(storageArr);
 }
 
