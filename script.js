@@ -15,6 +15,9 @@ const infoYear = document.getElementById("info-book-year");
 const infoAuthor = document.getElementById("info-book-author");
 const clearBtn = document.getElementById("clear-btn");
 
+
+
+
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -27,9 +30,11 @@ class Book {
 let myLibrary = [];
 let storageArr = JSON.parse(localStorage.getItem("book"));
 
-function createStorageBookCards(array) {
+
+
+function createStorageBookCards() {
   // Display the local storage books on the page
-  array.forEach((item) => {
+  storageArr.forEach((item) => {
     const div = document.createElement("div");
     const iconsContainer = document.createElement("div");
     const infoIcon = document.createElement("img");
@@ -66,7 +71,7 @@ function createStorageBookCards(array) {
         statusBtn.style.backgroundColor = "red";
         statusBtn.textContent = "UNREAD";
       }
-      localStorage.setItem("book", JSON.stringify(array)); // Update the read status on local storage
+      localStorage.setItem("book", JSON.stringify(storageArr)); // Update the read status on local storage
     });
 
     if (!item.read) {
@@ -120,9 +125,9 @@ function createStorageBookCards(array) {
 
     closeIcon.addEventListener("click", () => {
       // Remove div from books section and remove storage array
-      const index = array.indexOf(item);
+      const index = storageArr.indexOf(item);
       storageArr.splice(index, 1);
-      localStorage.setItem("book", JSON.stringify(array));
+      localStorage.setItem("book", JSON.stringify(storageArr));
       booksSection.removeChild(div);
     });
   });
@@ -157,7 +162,7 @@ infoCloseBtn.addEventListener("click", () => {
 function createBookCards() {
   // Create book card (This function handles the first form submits)
   removeCards(booksSection);
-  createStorageBookCards(storageArr);
+  createStorageBookCards();
 }
 
 function addBooksToLibrary() {
@@ -180,6 +185,7 @@ form.addEventListener("submit", (event) => {
   addBooksToLibrary();
   createBookCards();
   toggleModal();
+  console.log(storageArr);
 });
 
 addBookMenuBtn.addEventListener("click", () => {
