@@ -13,7 +13,7 @@ header {
   right: 0;
   height: 11vh;
   top: 0;
-  background-image: radial-gradient(circle farthest-corner at 10% 20%, rgb(97, 186, 255) 0%, rgb(166, 239, 253) 90.1%);
+  background-image: linear-gradient(135deg, #FFAA85 10%, #B3315F 100%);
 }
 header figure {
   display: flex;
@@ -56,7 +56,7 @@ header figure figcaption {
 }
 .add-book-modal form #add-book-btn {
   border: none;
-  background-image: radial-gradient(circle farthest-corner at 10% 20%, rgb(97, 186, 255) 0%, rgb(166, 239, 253) 90.1%);
+  background-image: linear-gradient(135deg, #FFAA85 10%, #B3315F 100%);
   border-radius: 8px;
   width: 125px;
   height: 40px;
@@ -74,7 +74,20 @@ header figure figcaption {
   border-radius: 999px;
   cursor: pointer;
   border: none;
-  background-image: radial-gradient(circle farthest-corner at 10% 20%, rgb(97, 186, 255) 0%, rgb(166, 239, 253) 90.1%);
+  background-image: linear-gradient(135deg, #FFAA85 10%, #B3315F 100%);
+}
+
+#clear-btn {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  width: max(4vw, 50px);
+  height: max(4vw, 50px);
+  font-size: 25px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: none;
+  background-image: linear-gradient(135deg, #FFAA85 10%, #B3315F 100%);
 }
 
 .visible {
@@ -94,10 +107,10 @@ header figure figcaption {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 10px;
+  border-radius: 12px;
   height: 250px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  min-width: 200px;
+  min-width: 250px;
 }
 #books-section div .close-i-container {
   display: flex;
@@ -120,14 +133,14 @@ header figure figcaption {
   cursor: pointer;
 }
 #books-section div .read-unread-btn {
-  height: 45px;
+  height: 100%;
   border: none;
   box-shadow: none;
   color: white;
   font-weight: bold;
   font-size: 14px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
   cursor: pointer;
 }
 #books-section div .book-information {
@@ -188,8 +201,13 @@ header figure figcaption {
   visibility: visible;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   #books-section {
     grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 600px) {
+  #books-section {
+    grid-template-columns: 1fr;
   }
 }/*# sourceMappingURL=style.css.map */

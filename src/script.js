@@ -13,7 +13,7 @@ const infoTitle = document.getElementById("info-book-title");
 const infoRating = document.getElementById("info-book-rating");
 const infoYear = document.getElementById("info-book-year");
 const infoAuthor = document.getElementById("info-book-author");
-const infoSection = document.getElementById("info-section");
+const clearBtn = document.getElementById("clear-btn");
 
 class Book {
   constructor(title, author, pages, read) {
@@ -24,8 +24,8 @@ class Book {
   }
 }
 
-const myLibrary = [];
-const storageArr = JSON.parse(localStorage.getItem("book"));
+let myLibrary = [];
+let storageArr = JSON.parse(localStorage.getItem("book"));
 
 function createStorageBookCards(array) {
   // Display the local storage books on the page
@@ -99,15 +99,12 @@ function createStorageBookCards(array) {
         },
       };
       const url = "https://hapi-books.p.rapidapi.com/search/";
-      // let {read: readed} = item
-      // THIS DESTRUCTION MAY NOT WORK !!
       const { title } = item;
       const replacedTitle = title.replace(/\s/g, "+").toLowerCase();
 
       fetch(`${url}${replacedTitle}`, options)
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
           const book = response[0];
           infoCover.setAttribute("src", book.cover);
           infoTitle.textContent = book.name;
@@ -115,8 +112,7 @@ function createStorageBookCards(array) {
           infoYear.textContent = `Year: ${book.year}`;
           infoAuthor.textContent = `From ${book.authors[0]}`;
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           infoTitle.textContent =
             "Book is not found or api request reached the limit.";
         });
@@ -146,7 +142,8 @@ function toggleInfo() {
   infoModal.classList.toggle("not-hidden");
 }
 
-function refresh(parent) {
+function removeCards(parent) {
+  // Remove all book cards
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
@@ -158,7 +155,7 @@ infoCloseBtn.addEventListener("click", () => {
 
 function createBookCards() {
   // Create book card (This function handles the first form submits)
-  refresh(booksSection);
+  removeCards(booksSection);
   createStorageBookCards(storageArr);
 }
 
@@ -182,8 +179,6 @@ form.addEventListener("submit", (event) => {
   addBooksToLibrary();
   createBookCards();
   toggleModal();
-  console.log(myLibrary, "my library array");
-  console.log(storageArr, "storage array");
 });
 
 addBookMenuBtn.addEventListener("click", () => {
@@ -191,4 +186,9 @@ addBookMenuBtn.addEventListener("click", () => {
   toggleModal();
 });
 
-// Try to make a modal book information menu with this api
+clearBtn.addEventListener("click", () => {
+  removeCards(booksSection);
+  myLibrary = [];
+  storageArr = [];
+  localStorage.clear();
+});
