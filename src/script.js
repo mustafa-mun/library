@@ -139,6 +139,7 @@ function toggleModal() {
 }
 
 function toggleInfo() {
+  // Toggle book info section
   infoModal.classList.toggle("not-hidden");
 }
 

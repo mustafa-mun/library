@@ -102,6 +102,10 @@ header figure figcaption {
   margin-left: 10vw;
   margin-right: 10vw;
 }
+#books-section p {
+  border-bottom: solid #e0d5d8 1px;
+  margin-right: 1px;
+}
 #books-section div {
   border: none;
   display: flex;
@@ -201,6 +205,11 @@ header figure figcaption {
   visibility: visible;
 }
 
+@media screen and (max-width: 1500px) {
+  #books-section {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
 @media screen and (max-width: 900px) {
   #books-section {
     grid-template-columns: 1fr 1fr;
