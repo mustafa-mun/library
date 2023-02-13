@@ -15,9 +15,6 @@ const infoYear = document.getElementById("info-book-year");
 const infoAuthor = document.getElementById("info-book-author");
 const clearBtn = document.getElementById("clear-btn");
 
-
-
-
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -29,8 +26,6 @@ class Book {
 
 let myLibrary = [];
 let storageArr = JSON.parse(localStorage.getItem("book"));
-
-
 
 function createStorageBookCards() {
   // Display the local storage books on the page
@@ -185,7 +180,6 @@ form.addEventListener("submit", (event) => {
   addBooksToLibrary();
   createBookCards();
   toggleModal();
-  console.log(storageArr);
 });
 
 addBookMenuBtn.addEventListener("click", () => {
