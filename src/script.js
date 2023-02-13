@@ -8,6 +8,12 @@ const modal = document.getElementById("add-book-modal");
 const booksSection = document.getElementById("books-section");
 const infoModal = document.getElementById("info-modal");
 const infoCloseBtn = document.getElementById("info-close-btn");
+const infoCover = document.getElementById("info-book-cover");
+const infoTitle = document.getElementById("info-book-title");
+const infoRating = document.getElementById("info-book-rating");
+const infoYear = document.getElementById("info-book-year");
+const infoAuthor = document.getElementById("info-book-author");
+const infoSection = document.getElementById("info-section");
 
 class Book {
   constructor(title, author, pages, read) {
@@ -22,6 +28,7 @@ const myLibrary = [];
 const storageArr = JSON.parse(localStorage.getItem("book"));
 
 function createStorageBookCards(array) {
+  // Display the local storage books on the page
   array.forEach((item) => {
     const div = document.createElement("div");
     const iconsContainer = document.createElement("div");
@@ -82,9 +89,40 @@ function createStorageBookCards(array) {
 
     infoIcon.addEventListener("click", () => {
       infoModal.classList.toggle("not-hidden");
+
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key":
+            "fcb893824cmsh1a10f5c1a7e2fe5p104ffbjsnaf212e4f6007",
+          "X-RapidAPI-Host": "hapi-books.p.rapidapi.com",
+        },
+      };
+      let url = "https://hapi-books.p.rapidapi.com/search/";
+      let title = item.title;
+      let replacedTitle = title.replace(/\s/g, "+").toLowerCase();
+      console.log(replacedTitle);
+
+      fetch(`${url}${replacedTitle}`, options)
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          const book = response[0];
+          infoCover.setAttribute("src", book.cover);
+          infoTitle.textContent = book.name;
+          infoRating.textContent = book.rating;
+          infoYear.textContent = book.year;
+          infoAuthor.textContent = `From ${book.authors[0]}`;
+        })
+        .catch((err) => {
+          console.log(err);
+          infoTitle.textContent =
+            "Book is not found or api request reached the limit.";
+        });
     });
 
     closeIcon.addEventListener("click", () => {
+      // Remove div from books section and remove storage array
       const index = array.indexOf(item);
       storageArr.splice(index, 1);
       localStorage.setItem("book", JSON.stringify(array));
@@ -107,20 +145,19 @@ function toggleInfo() {
   infoModal.classList.toggle("not-hidden");
 }
 
-function refresh() {
-  while (booksSection.firstChild) {
-    booksSection.removeChild(booksSection.firstChild);
+function refresh(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
   }
 }
 
 infoCloseBtn.addEventListener("click", () => {
-
-  toggleInfo()
-})
+  toggleInfo();
+});
 
 function createBookCards() {
-  // Create book card
-  refresh();
+  // Create book card (This function handles the first form submits)
+  refresh(booksSection);
   createStorageBookCards(storageArr);
 }
 
@@ -154,19 +191,3 @@ addBookMenuBtn.addEventListener("click", () => {
 });
 
 // Try to make a modal book information menu with this api
-
-// const options = {
-//   method: "GET",
-//   headers: {
-//     "X-RapidAPI-Key": "fcb893824cmsh1a10f5c1a7e2fe5p104ffbjsnaf212e4f6007",
-//     "X-RapidAPI-Host": "hapi-books.p.rapidapi.com",
-//   },
-// };
-
-// fetch(
-//   "https://hapi-books.p.rapidapi.com/search/a+song+of+ice+and+fire",
-//   options
-// )
-//   .then((response) => response.json())
-//   .then((response) => console.log(response))
-//   .catch((err) => console.error(err));
