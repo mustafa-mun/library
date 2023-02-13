@@ -98,10 +98,11 @@ function createStorageBookCards(array) {
           "X-RapidAPI-Host": "hapi-books.p.rapidapi.com",
         },
       };
-      let url = "https://hapi-books.p.rapidapi.com/search/";
-      let title = item.title;
-      let replacedTitle = title.replace(/\s/g, "+").toLowerCase();
-      console.log(replacedTitle);
+      const url = "https://hapi-books.p.rapidapi.com/search/";
+      // let {read: readed} = item
+      // THIS DESTRUCTION MAY NOT WORK !!
+      const { title } = item;
+      const replacedTitle = title.replace(/\s/g, "+").toLowerCase();
 
       fetch(`${url}${replacedTitle}`, options)
         .then((response) => response.json())
@@ -110,8 +111,8 @@ function createStorageBookCards(array) {
           const book = response[0];
           infoCover.setAttribute("src", book.cover);
           infoTitle.textContent = book.name;
-          infoRating.textContent = book.rating;
-          infoYear.textContent = book.year;
+          infoRating.textContent = `Rating: ${book.rating}`;
+          infoYear.textContent = `Year: ${book.year}`;
           infoAuthor.textContent = `From ${book.authors[0]}`;
         })
         .catch((err) => {
