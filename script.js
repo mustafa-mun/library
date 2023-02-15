@@ -157,7 +157,7 @@ infoCloseBtn.addEventListener("click", () => {
 function createBookCards() {
   // Create book card (This function handles the first form submits)
   removeCards(booksSection);
-  createStorageBookCards();
+  createStorageBookCards(storageArr);
 }
 
 function addBooksToLibrary() {
