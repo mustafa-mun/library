@@ -130,7 +130,7 @@ function createStorageBookCards() {
 
 if (storageArr) {
   // If local storage is not empty display the book cards
-  createStorageBookCards(storageArr);
+  createStorageBookCards();
 }
 
 function toggleModal() {
@@ -157,7 +157,9 @@ infoCloseBtn.addEventListener("click", () => {
 function createBookCards() {
   // Create book card (This function handles the first form submits)
   removeCards(booksSection);
+  if(storageArr) {
   createStorageBookCards();
+ }
 }
 
 function addBooksToLibrary() {
