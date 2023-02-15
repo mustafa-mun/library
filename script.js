@@ -179,7 +179,6 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   addBooksToLibrary();
   createBookCards();
-  location.reload();
   toggleModal();
 });
 
