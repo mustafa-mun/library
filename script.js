@@ -183,6 +183,7 @@ form.addEventListener("submit", (event) => {
   location.reload()
   createBookCards();
   toggleModal();
+  location.reload();
 });
 
 addBookMenuBtn.addEventListener("click", () => {
