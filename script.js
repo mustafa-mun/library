@@ -180,7 +180,6 @@ form.addEventListener("submit", (event) => {
   // Display book with form data
   event.preventDefault();
   addBooksToLibrary();
-  location.reload()
   createBookCards();
   toggleModal();
   location.reload();
